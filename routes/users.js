@@ -2,20 +2,28 @@ var express = require("express");
 var router = express.Router();
 
 const users_control = require("../modules/User/user_control");
-//đăng nhập
-router.post("/login", async (req, res) => {
+
+router.get("/connect", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    let result = await users_control.login(username, password);
-    if (result) {
-      res.json({ messenger: "Đăng nhập thành công", data: result });
-    } else {
-      res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
-    }
+    res.json({ message: "Connected!" });
   } catch (error) {
     console.log(error);
   }
-});
+}),
+  //đăng nhập
+  router.post("/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      let result = await users_control.login(username, password);
+      if (result) {
+        res.json({ messenger: "Đăng nhập thành công", data: result });
+      } else {
+        res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
 //đăng kí
 router.post("/reg", async (req, res) => {
   try {
