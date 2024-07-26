@@ -50,7 +50,7 @@ router.get("/recentchat", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.query;
     let result = await chat_control.deletechat(id);
     if (result) {
       res.json({ data: result });
