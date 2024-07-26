@@ -23,7 +23,7 @@ const add = async (username, text, name, id) => {
 
 const list = async (username) => {
   let result;
-  result = await ChatModel.find({ username: username });
+  result = await ChatModel.find({ username: username }).sort({ createdAt: -1 });
   return result;
 };
 
@@ -32,4 +32,13 @@ const recentchat = async (username) => {
   result = await ChatModel.findOne({ username: username }).sort({ createdAt: -1 });
   return result;
 };
-module.exports = { add, list, recentchat };
+const deletechat = async (id) => {
+  let result;
+    try {
+      result = await ChatModel.deleteOne({ _id: id });
+    } catch (error) {
+      console.log(error);
+    }
+  return result;
+};
+module.exports = { add, list, recentchat, deletechat };
