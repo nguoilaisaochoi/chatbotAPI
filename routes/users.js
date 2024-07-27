@@ -10,20 +10,22 @@ router.get("/connect", async (req, res) => {
     console.log(error);
   }
 }),
-  //đăng nhập
-  router.post("/login", async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      let result = await users_control.login(username, password);
-      if (result) {
-        res.json({ messenger: "Đăng nhập thành công", data: result });
-      } else {
-        res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
-      }
-    } catch (error) {
-      console.log(error);
+
+
+//đăng nhập
+router.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    let result = await users_control.login(username, password);
+    if (result) {
+      res.json({ messenger: "Đăng nhập thành công", data: result });
+    } else {
+      res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
     }
-  });
+  } catch (error) {
+    console.log(error);
+  }
+});
 //đăng kí
 router.post("/reg", async (req, res) => {
   try {
