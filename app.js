@@ -9,7 +9,6 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var chatRouter = require("./routes/chat");
 
-
 var app = express();
 
 //connect mongodb
@@ -27,7 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/chat", chatRouter);
@@ -38,7 +36,7 @@ app.use(function (req, res, next) {
 });
 
 //call sever
-cron.schedule("*/9 * * * *", () => {
+cron.schedule("*/2 * * * *", () => {
   console.log("Hey!");
 });
 
