@@ -15,6 +15,7 @@ var app = express();
 const database = require("./config/db");
 
 const cors = require("cors");
+const { default: axios } = require("axios");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -35,9 +36,29 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-//call sever
-cron.schedule("*/2 * * * *", () => {
+// delay
+const delayedFunction = () => {
   console.log("Hey!");
+  this.router.get("/user/connect", async (req, res) => {
+    try {
+      res.json({ message: "Connected!" });
+    } catch (error) {
+      console.error(error);
+    }
+  });
+};
+
+const fetchAPI = async () => {
+  try {
+    await axios.get("https://chatbotapi-nxd4.onrender.com/user/connect");
+  } catch (error) {
+    console.error("Error fetching API:", error.message);
+  }
+};
+
+//call sever
+cron.schedule("*/8 * * * *", () => {
+  fetchAPI();
 });
 
 // error handler
