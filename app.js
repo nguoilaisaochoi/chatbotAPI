@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
 });
 
 //call sever
-cron.schedule("*/2 * * * *", () => {
+cron.schedule("*/5 * * * *", () => {
   console.log("Hey!");
 });
 
