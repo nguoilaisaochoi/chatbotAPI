@@ -8,7 +8,7 @@ const add = async (username, text, name, id, img) => {
   let result;
   console.log(id);
   if (user && id) {
-    result = await ChatModel.findOneAndUpdate({ _id: id }, { text: text });
+    result = await ChatModel.findOneAndUpdate({ _id: id }, { text: text }, { img: img });
     return result;
   } else if (user) {
     const newChat = new ChatModel({
