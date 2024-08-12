@@ -5,8 +5,8 @@ const chat_control = require("../modules/ChatHistory/chat_control");
 //đăng nhập
 router.post("/add", async (req, res) => {
   try {
-    const { username, text, name, id } = req.body;
-    let result = await chat_control.add(username, text, name, id);
+    const { username, text, name, id, img } = req.body;
+    let result = await chat_control.add(username, text, name, id, img);
     if (result) {
       res.json({ data: result });
       console.log(result.text);

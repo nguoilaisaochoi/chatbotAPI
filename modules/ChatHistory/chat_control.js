@@ -3,7 +3,7 @@ const bcryptjs = require("bcryptjs");
 ChatModel = require("../ChatHistory/chat");
 const jwt = require("jsonwebtoken");
 
-const add = async (username, text, name, id) => {
+const add = async (username, text, name, id, img) => {
   const user = await Usermodel.findOne({ username });
   let result;
   console.log(id);
@@ -15,6 +15,7 @@ const add = async (username, text, name, id) => {
       username: username,
       text: text,
       name: name,
+      img: img,
     });
     result = await newChat.save();
     return result;
@@ -34,11 +35,11 @@ const recentchat = async (username) => {
 };
 const deletechat = async (id) => {
   let result;
-    try {
-      result = await ChatModel.deleteOne({ _id: id });
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    result = await ChatModel.deleteOne({ _id: id });
+  } catch (error) {
+    console.log(error);
+  }
   return result;
 };
 module.exports = { add, list, recentchat, deletechat };

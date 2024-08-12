@@ -6,6 +6,7 @@ const chatchema = new Schema(
     username: { type: String, require: true },
     text: { type: Array, require: true },
     name: { type: String, require: true },
+    img: { type: String },
   },
   {
     timestamps: true,
