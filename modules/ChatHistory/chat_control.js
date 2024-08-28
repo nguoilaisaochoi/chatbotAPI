@@ -3,16 +3,19 @@ const bcryptjs = require("bcryptjs");
 ChatModel = require("../ChatHistory/chat");
 const jwt = require("jsonwebtoken");
 
-const add = async (username, text, name, id, img) => {
-  const user = await Usermodel.findOne({ username });
+const add = async (iduser, text, name, id, img) => {
+  const user = await Usermodel.findById(iduser);
   let result;
-  console.log(id);
   if (user && id) {
-    result = await ChatModel.findOneAndUpdate({ _id: id }, { text: text }, { img: img });
+    result = await ChatModel.findOneAndUpdate(
+      { _id: id },
+      { text: text },
+      { img: img }
+    );
     return result;
   } else if (user) {
     const newChat = new ChatModel({
-      username: username,
+      username: user.username,
       text: text,
       name: name,
       img: img,
@@ -22,15 +25,25 @@ const add = async (username, text, name, id, img) => {
   }
 };
 
-const list = async (username) => {
+const list = async (id) => {
   let result;
-  result = await ChatModel.find({ username: username }).sort({ createdAt: -1 });
+  const user = await Usermodel.findById(id);
+  user
+    ? (result = await ChatModel.find({ username: user.username }).sort({
+        createdAt: -1,
+      }))
+    : null;
   return result;
 };
 
-const recentchat = async (username) => {
+const recentchat = async (id) => {
   let result;
-  result = await ChatModel.findOne({ username: username }).sort({ createdAt: -1 });
+  const user = await Usermodel.findById(id);
+  user
+    ? (result = await ChatModel.findOne({ username: user.username }).sort({
+        createdAt: -1,
+      }))
+    : null;
   return result;
 };
 const deletechat = async (id) => {
