@@ -5,7 +5,7 @@ const users_control = require("../modules/User/user_control");
 
 router.get("/connect", async (req, res) => {
   try {
-    res.json({ versionapp: "1.2.6" });
+    res.json({ versionapp: "1.2.7" });
   } catch (error) {
     console.log(error);
   }
