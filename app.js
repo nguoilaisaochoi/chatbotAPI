@@ -36,17 +36,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// delay
-const delayedFunction = () => {
-  console.log("Hey!");
-  this.router.get("/user/connect", async (req, res) => {
-    try {
-      res.json({ message: "Connected!" });
-    } catch (error) {
-      console.error(error);
-    }
-  });
-};
+
 
 const fetchAPI = async () => {
   try {
