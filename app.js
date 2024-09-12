@@ -47,7 +47,7 @@ const fetchAPI = async () => {
 };
 
 //call sever
-cron.schedule("*/8 * * * *", () => {
+cron.schedule("*/2 * * * *", () => {
   fetchAPI();
 });
 
