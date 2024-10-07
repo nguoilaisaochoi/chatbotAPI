@@ -4,8 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cron = require("node-cron");
-const { io, server } = require("./config/socket");
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var chatRouter = require("./routes/chat");
@@ -14,16 +12,6 @@ var app = express();
 
 //connect mongodb
 const database = require("./config/db");
-
-//socket connect
-io.on("connection", (socket) => {
-  console.log("New client connected" + socket.id);
-
-  // Handle disconnections
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
-});
 
 const cors = require("cors");
 const { default: axios } = require("axios");
