@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 ChatModel = require("../ChatHistory/chat");
 const jwt = require("jsonwebtoken");
+const socketIo = require("socket.io");
 
 const add = async (iduser, text, name, id, img) => {
   const user = await Usermodel.findById(iduser);
@@ -55,4 +56,26 @@ const deletechat = async (id) => {
   }
   return result;
 };
+
+// Create a Socket.IO server
+const io = socketIo();
+io.on("connection", (socket) => {
+  console.log("New client connected" + socket.id);
+
+  // Handle incoming chat messages
+  socket.on("sendDataClient", async (data) => {
+    try {
+      const { iduser, text, name, img } = data;
+      const chatData = await add(iduser, text, name, null, img);
+      io.emit("sendDataServer", chatData);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  // Handle disconnections
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
 module.exports = { add, list, recentchat, deletechat };
