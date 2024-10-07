@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 ChatModel = require("../ChatHistory/chat");
 const jwt = require("jsonwebtoken");
-const socketIo = require("socket.io");
+const { io } = require("../../app");
 
 const add = async (iduser, text, name, id, img) => {
   const user = await Usermodel.findById(iduser);
@@ -58,7 +58,7 @@ const deletechat = async (id) => {
 };
 
 // Create a Socket.IO server
-const io = socketIo();
+
 io.on("connection", (socket) => {
   console.log("New client connected" + socket.id);
 

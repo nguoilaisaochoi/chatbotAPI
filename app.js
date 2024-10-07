@@ -4,6 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cron = require("node-cron");
+const server = require("http").createServer();
+const io = require("socket.io")(server);
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -36,7 +38,14 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+io.on("connection", (socket) => {
+  console.log("New client connected" + socket.id);
 
+  // Handle disconnections
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
 
 const fetchAPI = async () => {
   try {
