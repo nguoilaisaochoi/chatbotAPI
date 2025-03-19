@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "api/**/*.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/chathistory/(.*)",
+        "dest": "modules/ChatHistory/$1"
+      },
+      {
+        "src": "/api/user/(.*)",
+        "dest": "modules/User/$1"
+      }
+    ]
+  }
