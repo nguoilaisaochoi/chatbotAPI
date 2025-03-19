@@ -9,7 +9,6 @@ router.post("/add", async (req, res) => {
     let result = await chat_control.add( iduser, text, name, id, img);
     if (result) {
       res.json({ data: result });
-      console.log(result.text);
     } else {
       res.json({ data: null });
     }
@@ -38,7 +37,6 @@ router.get("/recentchat", async (req, res) => {
     let result = await chat_control.recentchat(id);
     if (result) {
       res.json({ data: result });
-      console.log(result.text);
     } else {
       res.json({ data: null });
     }

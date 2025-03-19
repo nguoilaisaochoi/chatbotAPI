@@ -1,11 +1,8 @@
-const server = require("http").createServer();
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-server.listen(3000, () => {
-    console.log('Server đang chay tren cong 3000');
-});
+const app = require("../app");
 
+const PORT = process.env.PORT || 3001; 
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+server.listen(PORT, () => console.log("server runing on post" + PORT));
 module.exports = { io, server };
