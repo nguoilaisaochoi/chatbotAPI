@@ -37,7 +37,7 @@ app.use(function (req, res, next) {
 
 const fetchAPI = async () => {
   try {
-    await axios.get("https://chatbotapi-nxd4.onrender.com/user/connect");
+    await axios.get("https://chatbotapi-u738.onrender.com/user/connect");
   } catch (error) {
     console.error("Error fetching API:", error.message);
   }
