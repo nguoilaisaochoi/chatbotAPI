@@ -16,9 +16,15 @@ router.get("/connect", async (req, res) => {
       const { username, password } = req.body;
       let result = await users_control.login(username, password);
       if (result) {
-        res.json({ messenger: "Đăng nhập thành công", data: result });
+        const { name, username } = result;
+        res.json({
+          messenger: "Đăng nhập thành công",
+          data: { name, username },
+        });
       } else {
-        res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
+        res
+          .status(401)
+          .json({ messenger: "Thông tin đăng nhập không đúng", data: null });
       }
     } catch (error) {
       console.log(error);
