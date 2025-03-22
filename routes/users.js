@@ -18,7 +18,9 @@ router.get("/connect", async (req, res) => {
       if (result) {
         res.json({ messenger: "Đăng nhập thành công", data: result });
       } else {
-        res.json({ messenger: "Thông tin đăng nhập không đúng", data: null });
+        res
+          .status(401)
+          .json({ messenger: "Thông tin đăng nhập không đúng", data: null });
       }
     } catch (error) {
       console.log(error);
