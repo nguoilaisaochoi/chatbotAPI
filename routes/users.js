@@ -16,10 +16,10 @@ router.get("/connect", async (req, res) => {
       const { username, password } = req.body;
       let result = await users_control.login(username, password);
       if (result) {
-        const { name, username } = result;
+        const { _id, name, username } = result;
         res.json({
           messenger: "Đăng nhập thành công",
-          data: { name, username },
+          data: { _id, name, username },
         });
       } else {
         res
